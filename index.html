@@ -25,15 +25,14 @@
   </style>
 </head>
 <body>
-
 <div class="container">
   <div class="header">
     <h1>ГОРОД 812</h1>
     <p>Энергетиков 10а</p>
   </div>
 
-  <!-- ПРЯМАЯ ИСПРАВЛЕННАЯ ССЫЛКА НА ГУГЛ ФОРМУ -->
-  <form action="https://google.com" method="POST">
+  <!-- ИСПРАВЛЕННАЯ ССЫЛКА НА ОТПРАВКУ В GOOGLE FORM -->
+  <form action="https://docs.google.com/forms/d/e/14DVzG6r2XnKtJBrKObQ1DsWIQkKm3b88ubyKq6sDwGI/formResponse" method="POST">
     
     <h2>Дата и менеджер</h2>
     
@@ -41,7 +40,6 @@
       <label>Дата</label>
       <input type="date" name="entry.1444158913" required id="dateField">
     </div>
-
     <div class="form-group">
       <label>Заполнил менеджер</label>
       <select name="entry.2016335359" required>
@@ -50,48 +48,38 @@
         <option value="Батенев">Батенев</option>
       </select>
     </div>
-
     <h2>Выручка</h2>
-
     <div class="form-group">
       <label>Наличные сумма</label>
       <input type="number" step="any" name="entry.254308553" required placeholder="0.00">
     </div>
-
     <div class="form-group">
       <label>Безналичный расчет сумма</label>
       <input type="number" step="any" name="entry.174620023" required placeholder="0.00">
     </div>
-
     <div class="form-group">
       <label>Доставка</label>
       <input type="number" step="any" name="entry.197940176" required placeholder="0.00">
     </div>
-
     <h2>Расходы</h2>
-
     <div class="form-group">
       <label>Аванс/ЗП</label>
       <input type="number" step="any" name="entry.669866874" required placeholder="0.00">
     </div>
-
     <div class="form-group">
       <label>Сырье (чеки)</label>
       <input type="number" step="any" name="entry.1226767554" required placeholder="0.00">
     </div>
-
     <div class="form-group">
       <label>Развоз персонала</label>
       <input type="number" step="any" name="entry.2064273874" required placeholder="0.00">
     </div>
-
     <div class="btn-group">
       <button type="submit">ОТПРАВИТЬ ОТЧЕТ</button>
       <button type="reset">Очистить</button>
     </div>
   </form>
 </div>
-
 <script>
   // Автоматическая дата дня
   document.getElementById('dateField').valueAsDate = new Date();
