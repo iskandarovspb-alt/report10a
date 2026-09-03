@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Город 812 — Ежедневный отчет</title>
-  <link rel="manifest" href="manifest.json">
+  <!-- Добавили хвостик ?v=2, чтобы сбросить кэш манифеста -->
+  <link rel="manifest" href="manifest.json?v=2">
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f4f6f9; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
     .container { max-width: 480px; width: 100%; background: #ffffff; padding: 25px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
@@ -32,7 +33,6 @@
     <p>Энергетиков 10а</p>
   </div>
 
-  <!-- Прямая отправка данных в вашу форму без скриптов -->
   <form action="https://google.com" method="POST">
     
     <h2>Дата и менеджер</h2>
@@ -95,13 +95,6 @@
 <script>
   // Автоматическая подстановка текущей даты
   document.getElementById('dateField').valueAsDate = new Date();
-
-  // Регистрация Service Worker для PWA
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js').catch(err => console.log(err));
-    });
-  }
 </script>
 </body>
 </html>
