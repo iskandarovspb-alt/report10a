@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Город 812 — Ежедневный отчет</title>
-  <link rel="manifest" href="manifest.json?v=4">
+  <link rel="manifest" href="manifest.json?v=3">
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f4f6f9; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
-    .container { max-width: 480px; width: 100%; background: #ffffff; padding: 25px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+    .container { max-width: 480px; width: 100%; background: #ffffff; padding: 25px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); position: relative; }
     .header { text-align: center; margin-bottom: 25px; }
     .header h1 { margin: 0; font-size: 22px; color: #1a1a1a; text-transform: uppercase; letter-spacing: 1px; }
     .header p { margin: 5px 0 0; font-size: 14px; color: #666; }
@@ -22,6 +22,8 @@
     button:hover { background-color: #e64a19; }
     button[type="reset"] { flex: 1; background-color: #e0e0e0; color: #555; }
     button[type="reset"]:hover { background-color: #d6d6d6; }
+    
+    /* Стили для всплывающего уведомления */
     .toast { display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background-color: #4caf50; color: white; padding: 16px 24px; border-radius: 8px; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; text-align: center; }
   </style>
 </head>
@@ -35,12 +37,16 @@
     <p>Энергетиков 10а</p>
   </div>
 
+  <!-- Добавили id="reportForm" для перехвата отправки через JavaScript -->
   <form id="reportForm">
+    
     <h2>Дата и менеджер</h2>
+    
     <div class="form-group">
       <label>Дата</label>
       <input type="date" id="dateField" required>
     </div>
+
     <div class="form-group">
       <label>Заполнил менеджер</label>
       <select id="managerField" required>
@@ -51,28 +57,34 @@
     </div>
 
     <h2>Выручка</h2>
+
     <div class="form-group">
       <label>Наличные сумма</label>
       <input type="number" step="any" id="cashField" required placeholder="0.00">
     </div>
+
     <div class="form-group">
       <label>Безналичный расчет сумма</label>
       <input type="number" step="any" id="cardField" required placeholder="0.00">
     </div>
+
     <div class="form-group">
       <label>Доставка</label>
       <input type="number" step="any" id="deliveryField" required placeholder="0.00">
     </div>
 
     <h2>Расходы</h2>
+
     <div class="form-group">
       <label>Аванс/ЗП</label>
       <input type="number" step="any" id="salaryField" required placeholder="0.00">
     </div>
+
     <div class="form-group">
       <label>Сырье (чеки)</label>
       <input type="number" step="any" id="rawField" required placeholder="0.00">
     </div>
+
     <div class="form-group">
       <label>Развоз персонала</label>
       <input type="number" step="any" id="taxiField" required placeholder="0.00">
@@ -86,15 +98,18 @@
 </div>
 
 <script>
+  // Установка сегодняшней даты
   document.getElementById('dateField').valueAsDate = new Date();
 
+  // Фоновая отправка данных без перезагрузки страницы
   document.getElementById('reportForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+    e.preventDefault(); // Запрещаем браузеру мигать и перезагружать страницу
     
     const submitBtn = document.getElementById('submitBtn');
     submitBtn.disabled = true;
     submitBtn.innerText = "ОТПРАВЛЯЕТСЯ...";
 
+    // Формируем технический запрос для Google Формы
     const formData = new FormData();
     formData.append('entry.1444158913', document.getElementById('dateField').value);
     formData.append('entry.2016335359', document.getElementById('managerField').value);
@@ -105,21 +120,24 @@
     formData.append('entry.1226767554', document.getElementById('rawField').value);
     formData.append('entry.2064273874', document.getElementById('taxiField').value);
 
-    // ЗДЕСЬ СТОИТ ТЕХНИЧЕСКИЙ АДРЕС ОТПРАВКИ ОТВЕТОВ
+    // Отправляем в скрытом режиме (используем режим no-cors, чтобы обойти блокировки браузера)
     fetch('https://google.com', {
       method: 'POST',
       mode: 'no-cors',
       body: formData
     }).then(() => {
+      // Показывать зелёное уведомление об успешной отправке
       const toast = document.getElementById('toast');
       toast.style.display = 'block';
       
+      // Сбросить форму и вернуть кнопку в исходный вид
       document.getElementById('reportForm').reset();
       document.getElementById('dateField').valueAsDate = new Date();
       submitBtn.disabled = false;
       submitBtn.innerText = "ОТПРАВИТЬ ОТЧЕТ";
 
-      setTimeout(() => { toast.style.display = 'none'; }, 4000);
+      // Спрятать уведомление через 4 секунды
+      setTimeout(() => { toast.style.style.display = 'none'; }, 4000);
     }).catch(err => {
       alert('Ошибка сети. Попробуйте еще раз.');
       submitBtn.disabled = false;
