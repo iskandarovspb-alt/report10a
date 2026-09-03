@@ -1,15 +1,9 @@
 {
-  "name": "Отчет Энергетиков 10а",
-  "short_name": "Отчет 10а",
-  "start_url": "index.html",
+  "name": "Город 812 — Ежедневный отчет",
+  "short_name": "Город 812",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#4285f4",
-  "icons": [
-    {
-      "src": "icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+  "background_color": "#f4f4f2",
+  "theme_color": "#111111",
+  "lang": "ru"
 }
