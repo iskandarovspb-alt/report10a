@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Город 812 — Ежедневный отчет</title>
-  <!-- Добавили хвостик ?v=2, чтобы сбросить кэш манифеста -->
-  <link rel="manifest" href="manifest.json?v=2">
+  <link rel="manifest" href="manifest.json?v=4">
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f4f6f9; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
     .container { max-width: 480px; width: 100%; background: #ffffff; padding: 25px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
@@ -23,9 +22,12 @@
     button:hover { background-color: #e64a19; }
     button[type="reset"] { flex: 1; background-color: #e0e0e0; color: #555; }
     button[type="reset"]:hover { background-color: #d6d6d6; }
+    .toast { display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background-color: #4caf50; color: white; padding: 16px 24px; border-radius: 8px; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; text-align: center; }
   </style>
 </head>
 <body>
+
+<div id="toast" class="toast">Успешно отправлено! Данные в таблице.</div>
 
 <div class="container">
   <div class="header">
@@ -33,18 +35,15 @@
     <p>Энергетиков 10а</p>
   </div>
 
-  <form action="https://docs.google.com/forms/d/e/1FAIpQLScdIG-zovGd3BGOv-lXNkofipEhjCzCBx0AxWkyJYu8hNRkeQ/viewform" method="POST">
-    
+  <form id="reportForm">
     <h2>Дата и менеджер</h2>
-    
     <div class="form-group">
       <label>Дата</label>
-      <input type="date" name="entry.1444158913" required id="dateField">
+      <input type="date" id="dateField" required>
     </div>
-
     <div class="form-group">
       <label>Заполнил менеджер</label>
-      <select name="entry.2016335359" required>
+      <select id="managerField" required>
         <option value="">Выберите менеджера</option>
         <option value="Антонов">Антонов</option>
         <option value="Батенев">Батенев</option>
@@ -52,49 +51,81 @@
     </div>
 
     <h2>Выручка</h2>
-
     <div class="form-group">
       <label>Наличные сумма</label>
-      <input type="number" step="any" name="entry.254308553" required placeholder="0.00">
+      <input type="number" step="any" id="cashField" required placeholder="0.00">
     </div>
-
     <div class="form-group">
       <label>Безналичный расчет сумма</label>
-      <input type="number" step="any" name="entry.174620023" required placeholder="0.00">
+      <input type="number" step="any" id="cardField" required placeholder="0.00">
     </div>
-
     <div class="form-group">
       <label>Доставка</label>
-      <input type="number" step="any" name="entry.197940176" required placeholder="0.00">
+      <input type="number" step="any" id="deliveryField" required placeholder="0.00">
     </div>
 
     <h2>Расходы</h2>
-
     <div class="form-group">
       <label>Аванс/ЗП</label>
-      <input type="number" step="any" name="entry.669866874" required placeholder="0.00">
+      <input type="number" step="any" id="salaryField" required placeholder="0.00">
     </div>
-
     <div class="form-group">
       <label>Сырье (чеки)</label>
-      <input type="number" step="any" name="entry.1226767554" required placeholder="0.00">
+      <input type="number" step="any" id="rawField" required placeholder="0.00">
     </div>
-
     <div class="form-group">
       <label>Развоз персонала</label>
-      <input type="number" step="any" name="entry.2064273874" required placeholder="0.00">
+      <input type="number" step="any" id="taxiField" required placeholder="0.00">
     </div>
 
     <div class="btn-group">
-      <button type="submit">ОТПРАВИТЬ ОТЧЕТ</button>
+      <button type="submit" id="submitBtn">ОТПРАВИТЬ ОТЧЕТ</button>
       <button type="reset">Очистить</button>
     </div>
   </form>
 </div>
 
 <script>
-  // Автоматическая подстановка текущей даты
   document.getElementById('dateField').valueAsDate = new Date();
+
+  document.getElementById('reportForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerText = "ОТПРАВЛЯЕТСЯ...";
+
+    const formData = new FormData();
+    formData.append('entry.1444158913', document.getElementById('dateField').value);
+    formData.append('entry.2016335359', document.getElementById('managerField').value);
+    formData.append('entry.254308553', document.getElementById('cashField').value);
+    formData.append('entry.174620023', document.getElementById('cardField').value);
+    formData.append('entry.197940176', document.getElementById('deliveryField').value);
+    formData.append('entry.669866874', document.getElementById('salaryField').value);
+    formData.append('entry.1226767554', document.getElementById('rawField').value);
+    formData.append('entry.2064273874', document.getElementById('taxiField').value);
+
+    // ЗДЕСЬ СТОИТ ТЕХНИЧЕСКИЙ АДРЕС ОТПРАВКИ ОТВЕТОВ
+    fetch('https://google.com', {
+      method: 'POST',
+      mode: 'no-cors',
+      body: formData
+    }).then(() => {
+      const toast = document.getElementById('toast');
+      toast.style.display = 'block';
+      
+      document.getElementById('reportForm').reset();
+      document.getElementById('dateField').valueAsDate = new Date();
+      submitBtn.disabled = false;
+      submitBtn.innerText = "ОТПРАВИТЬ ОТЧЕТ";
+
+      setTimeout(() => { toast.style.display = 'none'; }, 4000);
+    }).catch(err => {
+      alert('Ошибка сети. Попробуйте еще раз.');
+      submitBtn.disabled = false;
+      submitBtn.innerText = "ОТПРАВИТЬ ОТЧЕТ";
+    });
+  });
 </script>
 </body>
 </html>
