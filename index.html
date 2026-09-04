@@ -35,7 +35,8 @@
     <p>Энергетиков 10а</p>
   </div>
 
-  <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScdIG-zovGd3BGOv-lXNkofipEhjCzCBx0AxWkyJYu8hNRkeQ/formResponse" method="POST">
+  <!-- Добавлен id="reportForm" -->
+  <form id="reportForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScdIG-zovGd3BGOv-lXNkofipEhjCzCBx0AxWkyJYu8hNRkeQ/formResponse" method="POST">
     <h2>Дата и менеджер</h2>
     <div class="form-group">
       <label>Дата</label>
@@ -120,7 +121,8 @@
     // Для последнего поля (Развоз) используем ID sentinel, который выдала консоль
     formData.append('entry.939032335', document.getElementById('taxiField').value);
 
-    fetch('https://google.com', {
+    // ИСПРАВЛЕНО: подставляем правильный URL Google Forms
+    fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLScdIG-zovGd3BGOv-lXNkofipEhjCzCBx0AxWkyJYu8hNRkeQ/formResponse', {
       method: 'POST',
       mode: 'no-cors',
       body: formData
