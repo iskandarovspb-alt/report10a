@@ -83,14 +83,17 @@
             box-shadow: 0 0 0 3px rgba(255,87,34,0.1);
         }
 
-        /* Красивое поле даты по центру */
+        /* Красивое поле даты по центру и чуть меньше */
         input[type="date"] {
+            width: 75%;
+            margin: 0 auto;
+            display: block;
             text-align: center;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 500;
             letter-spacing: 0.5px;
             color: #1a1a1a;
-            padding: 14px 12px;
+            padding: 12px 10px;
             cursor: pointer;
         }
         input[type="date"]::-webkit-calendar-picker-indicator {
