@@ -39,9 +39,13 @@
     
     <div class="form-group">
       <label>Дата</label>
-      <!-- Сделали поле текстовым, чтобы Google гарантированно принимал дату без дробления -->
-      <input type="text" name="entry.139568847" id="dateField" required placeholder="ДД.ММ.ГГГГ">
+      <input type="date" id="dateField" required>
     </div>
+
+    <!-- Скрытые технические поля для корректной передачи даты в Google -->
+    <input type="hidden" name="entry.139568847_year" id="dateYear">
+    <input type="hidden" name="entry.139568847_month" id="dateMonth">
+    <input type="hidden" name="entry.139568847_day" id="dateDay">
 
     <div class="form-group">
       <label>Заполнил менеджер</label>
@@ -94,13 +98,25 @@
 </div>
 
 <script>
-  // Скрипт автоматически прописывает сегодняшнюю дату в удобном для Google формате (ДД.ММ.ГГГГ)
-  const today = new Date();
-  const dd = String(today.getDate()).padStart(2, '0');
-  const mm = String(today.getMonth() + 1).padStart(2, '0'); // Январь - это 0
-  const yyyy = today.getFullYear();
+  const dateInput = document.getElementById('dateField');
   
-  document.getElementById('dateField').value = `${dd}.${mm}.${yyyy}`;
+  // Автоматическая подстановка сегодняшней даты при открытии приложения
+  dateInput.valueAsDate = new Date();
+
+  // Функция, которая разбивает дату на год, месяц и день для Google
+  function СформироватьДату() {
+    const val = dateInput.value; // формат YYYY-MM-DD
+    if (val) {
+      const parts = val.split('-');
+      document.getElementById('dateYear').value = parts[0];
+      document.getElementById('dateMonth').value = parts[1];
+      document.getElementById('dateDay').value = parts[2];
+    }
+  }
+
+  // Запускаем распределение даты сразу и отслеживаем её изменения менеджером
+  СформироватьДату();
+  dateInput.addEventListener('change', СформироватьДату);
 </script>
 </body>
 </html>
