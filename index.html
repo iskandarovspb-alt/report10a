@@ -1,122 +1,200 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Город 812 — Ежедневный отчет</title>
-  <link rel="manifest" href="manifest.json?v=20">
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f4f6f9; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
-    .container { max-width: 480px; width: 100%; background: #ffffff; padding: 25px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
-    .header { text-align: center; margin-bottom: 25px; }
-    .header h1 { margin: 0; font-size: 22px; color: #1a1a1a; text-transform: uppercase; letter-spacing: 1px; }
-    .header p { margin: 5px 0 0; font-size: 14px; color: #666; }
-    h2 { font-size: 18px; color: #ff5722; margin: 25px 0 15px; padding-bottom: 5px; border-bottom: 2px solid #ffe0b2; }
-    h2:first-of-type { margin-top: 0; }
-    .form-group { margin-bottom: 18px; }
-    label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px; color: #444; }
-    input, select { width: 100%; padding: 12px; border: 1px solid #ccd1d9; border-radius: 8px; box-sizing: border-box; font-size: 16px; background-color: #fdfdfd; transition: all 0.2s; }
-    input:focus, select:focus { border-color: #ff5722; outline: none; background-color: #fff; box-shadow: 0 0 0 3px rgba(255,87,34,0.1); }
-    .btn-group { display: flex; gap: 12px; margin-top: 30px; }
-    button { flex: 2; background-color: #ff5722; color: white; border: none; padding: 15px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: background 0.2s; }
-    button:hover { background-color: #e64a19; }
-    button[type="reset"] { flex: 1; background-color: #e0e0e0; color: #555; }
-    button[type="reset"]:hover { background-color: #d6d6d6; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Город 812 — Ежедневный отчет</title>
+    <link rel="manifest" href="manifest.json?v=20">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 480px;
+            width: 100%;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 22px;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #666;
+        }
+        h2 {
+            font-size: 18px;
+            color: #ff5722;
+            margin: 25px 0 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #ffe0b2;
+        }
+        h2:first-of-type {
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #444;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd1d9;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background-color: #fdfdfd;
+            transition: all 0.2s;
+        }
+        input:focus, select:focus {
+            border-color: #ff5722;
+            outline: none;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(255,87,34,0.1);
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        button {
+            flex: 2;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #e64a19;
+        }
+        button[type="reset"] {
+            flex: 1;
+            background-color: #e0e0e0;
+            color: #555;
+        }
+        button[type="reset"]:hover {
+            background-color: #d6d6d6;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <h1>ГОРОД 812</h1>
+            <p>Энергетиков 10а</p>
+        </div>
 
-<div class="container">
-  <div class="header">
-    <h1>ГОРОД 812</h1>
-    <p>Энергетиков 10а</p>
-  </div>
+        <form id="reportForm" 
+              action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScdIG-zovGd3BGOv-lXNkofipEhjCzCBx0AxWkyJYu8hNRkeQ/formResponse" 
+              method="POST">
 
-  <!-- Отправка идет стандартным методом POST напрямую на сервера Google -->
-  <form id="reportForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScdIG-zovGd3BGOv-lXNkofipEhjCzCBx0AxWkyJYu8hNRkeQ/formResponse" method="POST">
-    
-    <h2>Дата и менеджер</h2>
-    
-    <div class="form-group">
-      <label>Дата</label>
-      <input type="date" id="dateField" required>
+            <h2>Дата и менеджер</h2>
+
+            <div class="form-group">
+                <label>Дата</label>
+                <input type="date" id="dateField" required>
+            </div>
+
+            <!-- Скрытые поля для даты -->
+            <input type="hidden" name="entry.139568847_year" id="dateYear">
+            <input type="hidden" name="entry.139568847_month" id="dateMonth">
+            <input type="hidden" name="entry.139568847_day" id="dateDay">
+
+            <div class="form-group">
+                <label>Заполнил менеджер</label>
+                <select name="entry.939032335" required>
+                    <option value="">Выберите менеджера</option>
+                    <option value="Антонов">Антонов</option>
+                    <option value="Батенев">Батенев</option>
+                </select>
+            </div>
+
+            <h2>Выручка</h2>
+
+            <div class="form-group">
+                <label>Наличные сумма</label>
+                <input type="number" step="any" name="entry.1081676025" required placeholder="0.00">
+            </div>
+
+            <div class="form-group">
+                <label>Безналичный расчет сумма</label>
+                <input type="number" step="any" name="entry.2142593659" required placeholder="0.00">
+            </div>
+
+            <div class="form-group">
+                <label>Доставка</label>
+                <input type="number" step="any" name="entry.459974487" required placeholder="0.00">
+            </div>
+
+            <h2>Расходы</h2>
+
+            <div class="form-group">
+                <label>Аванс/ЗП</label>
+                <input type="number" step="any" name="entry.269655102" required placeholder="0.00">
+            </div>
+
+            <div class="form-group">
+                <label>Сырье (чеки)</label>
+                <input type="number" step="any" name="entry.1099672490" required placeholder="0.00">
+            </div>
+
+            <div class="form-group">
+                <label>Развоз персонала</label>
+                <input type="number" step="any" name="entry.1479624012" required placeholder="0.00">
+            </div>
+
+            <div class="btn-group">
+                <button type="submit">ОТПРАВИТЬ ОТЧЕТ</button>
+                <button type="reset">Очистить</button>
+            </div>
+        </form>
     </div>
 
-    <!-- Скрытые технические поля для корректной передачи даты в Google -->
-    <input type="hidden" name="entry.139568847_year" id="dateYear">
-    <input type="hidden" name="entry.139568847_month" id="dateMonth">
-    <input type="hidden" name="entry.139568847_day" id="dateDay">
+    <script>
+        const dateInput = document.getElementById('dateField');
+        dateInput.valueAsDate = new Date();
 
-    <div class="form-group">
-      <label>Заполнил менеджер</label>
-      <select name="entry.1081676025" required>
-        <option value="">Выберите менеджера</option>
-        <option value="Антонов">Антонов</option>
-        <option value="Батенев">Батенев</option>
-      </select>
-    </div>
+        function СформироватьДату() {
+            const val = dateInput.value;
+            if (val) {
+                const parts = val.split('-');
+                document.getElementById('dateYear').value = parts[0];
+                document.getElementById('dateMonth').value = parts[1];
+                document.getElementById('dateDay').value = parts[2];
+            }
+        }
 
-    <h2>Выручка</h2>
-
-    <div class="form-group">
-      <label>Наличные сумма</label>
-      <input type="number" step="any" name="entry.2142593659" required placeholder="0.00">
-    </div>
-
-    <div class="form-group">
-      <label>Безналичный расчет сумма</label>
-      <input type="number" step="any" name="entry.459974487" required placeholder="0.00">
-    </div>
-
-    <div class="form-group">
-      <label>Доставка</label>
-      <input type="number" step="any" name="entry.269655102" required placeholder="0.00">
-    </div>
-
-    <h2>Расходы</h2>
-
-    <div class="form-group">
-      <label>Аванс/ЗП</label>
-      <input type="number" step="any" name="entry.1099672490" required placeholder="0.00">
-    </div>
-
-    <div class="form-group">
-      <label>Сырье (чеки)</label>
-      <input type="number" step="any" name="entry.1479624012" required placeholder="0.00">
-    </div>
-
-    <div class="form-group">
-      <label>Развоз персонала</label>
-      <input type="number" step="any" name="entry.939032335" required placeholder="0.00">
-    </div>
-
-    <div class="btn-group">
-      <button type="submit">ОТПРАВИТЬ ОТЧЕТ</button>
-      <button type="reset">Очистить</button>
-    </div>
-  </form>
-</div>
-
-<script>
-  const dateInput = document.getElementById('dateField');
-  
-  // Автоматическая подстановка сегодняшней даты при открытии приложения
-  dateInput.valueAsDate = new Date();
-
-  // Функция, которая разбивает дату на год, месяц и день для Google
-  function СформироватьДату() {
-    const val = dateInput.value; // формат YYYY-MM-DD
-    if (val) {
-      const parts = val.split('-');
-      document.getElementById('dateYear').value = parts[0];
-      document.getElementById('dateMonth').value = parts[1];
-      document.getElementById('dateDay').value = parts[2];
-    }
-  }
-
-  // Запускаем распределение даты сразу и отслеживаем её изменения менеджером
-  СформироватьДату();
-  dateInput.addEventListener('change', СформироватьДату);
-</script>
+        СформироватьДату();
+        dateInput.addEventListener('change', СформироватьДату);
+    </script>
 </body>
 </html>
