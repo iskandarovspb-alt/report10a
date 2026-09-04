@@ -1,9 +1,37 @@
 {
   "name": "Город 812 — Ежедневный отчет",
   "short_name": "Город 812",
-  "start_url": "./index.html",
+  "description": "Ежедневный отчет Энергетиков 10а",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#f4f4f2",
-  "theme_color": "#111111",
-  "lang": "ru"
+  "background_color": "#f4f6f9",
+  "theme_color": "#ff5722",
+  "lang": "ru",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
 }
