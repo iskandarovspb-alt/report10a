@@ -82,7 +82,6 @@
             background-color: #fff;
             box-shadow: 0 0 0 3px rgba(255,87,34,0.1);
         }
-
         /* Красивое поле даты по центру и чуть меньше */
         input[type="date"] {
             width: 75%;
@@ -101,7 +100,6 @@
             cursor: pointer;
             padding: 4px;
         }
-
         .btn-group {
             display: flex;
             gap: 12px;
@@ -139,23 +137,18 @@
             <h1>ГОРОД 812</h1>
             <p>Энергетиков 10а</p>
         </div>
-
         <form id="reportForm" 
               action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScdIG-zovGd3BGOv-lXNkofipEhjCzCBx0AxWkyJYu8hNRkeQ/formResponse" 
               method="POST">
-
             <h2>Дата и менеджер</h2>
-
             <div class="form-group">
                 <label>Дата</label>
                 <input type="date" id="dateField" required>
             </div>
-
             <!-- Скрытые поля для даты -->
             <input type="hidden" name="entry.139568847_year" id="dateYear">
             <input type="hidden" name="entry.139568847_month" id="dateMonth">
             <input type="hidden" name="entry.139568847_day" id="dateDay">
-
             <div class="form-group">
                 <label>Заполнил менеджер</label>
                 <select name="entry.939032335" required>
@@ -164,52 +157,45 @@
                     <option value="Батенев">Батенев</option>
                 </select>
             </div>
-
             <h2>Выручка</h2>
-
             <div class="form-group">
                 <label>Наличные сумма</label>
                 <input type="number" step="any" name="entry.1081676025" required placeholder="0.00">
             </div>
-
             <div class="form-group">
                 <label>Безналичный расчет сумма</label>
                 <input type="number" step="any" name="entry.2142593659" required placeholder="0.00">
             </div>
-
             <div class="form-group">
                 <label>Доставка</label>
                 <input type="number" step="any" name="entry.459974487" required placeholder="0.00">
             </div>
-
             <h2>Расходы</h2>
-
             <div class="form-group">
                 <label>Аванс/ЗП</label>
                 <input type="number" step="any" name="entry.269655102" required placeholder="0.00">
             </div>
-
+            <div class="form-group">
+                <label>Вызывной персонал</label>
+                <input type="number" step="any" name="entry.361809290" required placeholder="0.00">
+            </div>
             <div class="form-group">
                 <label>Сырье (чеки)</label>
                 <input type="number" step="any" name="entry.1099672490" required placeholder="0.00">
             </div>
-
             <div class="form-group">
                 <label>Развоз персонала</label>
                 <input type="number" step="any" name="entry.1479624012" required placeholder="0.00">
             </div>
-
             <div class="btn-group">
                 <button type="submit">ОТПРАВИТЬ ОТЧЕТ</button>
                 <button type="reset">Очистить</button>
             </div>
         </form>
     </div>
-
     <script>
         const dateInput = document.getElementById('dateField');
         dateInput.valueAsDate = new Date();
-
         function СформироватьДату() {
             const val = dateInput.value;
             if (val) {
@@ -219,7 +205,6 @@
                 document.getElementById('dateDay').value = parts[2];
             }
         }
-
         СформироватьДату();
         dateInput.addEventListener('change', СформироватьДату);
     </script>
